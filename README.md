@@ -30,6 +30,7 @@ This script helps Bash learners understand:
 #!/bin/bash
 FILE=${1:-/tmp/status.marker}  # Use first argument or default file
 MAX_AGE=${2:-300}              # Use second argument or default 300 sec
+```
 
 | **Argument** | **Purpose**          | **Example**                          |
 | ------------ | -------------------- | ------------------------------------ |

@@ -45,37 +45,41 @@ MAX_AGE=${2:-300}              # Use second argument or default 300 sec
 ## How It Calculates File Age
 
 ### Get current time
-current_time=$(date +%s)
+`current_time=$(date +%s)`
 → Gives seconds since 1970 (Unix epoch)
 
 ### Get file’s modification time
-file_mtime=$(stat -c %Y "$FILE")
+`file_mtime=$(stat -c %Y "$FILE")`
 → %Y outputs the file’s “last modified” time in seconds
 
 ### Compute age
-age=$(( current_time - file_mtime ))
+`age=$(( current_time - file_mtime ))`
 
 ### Compare and print
+```bash
 if [ "$age" -gt "$MAX_AGE" ]; then
     echo "EXPIRED"
 else
     echo "Fresh"
 fi
-
+```
 ## Example Usage
 ### Example 1 – Default (no arguments)
-./agecheck.sh
+`./agecheck.sh`
 ### Output
+```bash
 Checking file: /tmp/status.marker
 Fresh: '/tmp/status.marker' is 12 seconds old (threshold: 300).
-
+```
 ### Example 2 – Check a specific file
-./agecheck.sh notes.log 600
+`./agecheck.sh notes.log 600`
 ### Output
-EXPIRED: 'notes.log' is 720 seconds old (threshold: 600).
+`EXPIRED: 'notes.log' is 720 seconds old (threshold: 600).`
 
 ### Example 3 – Simulate an older file
+```bash
 touch -d "10 minutes ago" old.txt
 ./agecheck.sh old.txt 300
+```
 ### Output
-EXPIRED: 'old.txt' is 600 seconds old (threshold: 300).
+`EXPIRED: 'old.txt' is 600 seconds old (threshold: 300).`

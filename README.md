@@ -16,11 +16,11 @@ This script helps Bash learners understand:
 `agecheck.sh` checks the **age** of a file based on its **last modification time**.
 
 - If the file is **older** than the allowed time (`MAX_AGE`),  
-  → it prints: `EXPIRED`
+  → it prints: `STALE`
 - If the file is **younger**,  
-  → it prints: `Fresh`
+  → it prints: `ACTIVE`
 - If the file **doesn’t exist**,  
-  → it automatically **creates** it so you can track it later.
+  → it prints: `ERROR: File not found: {file}`.
 
 ---
 
@@ -69,12 +69,12 @@ fi
 ### Output
 ```bash
 Checking file: /tmp/status.marker
-Fresh: '/tmp/status.marker' is 12 seconds old (threshold: 300).
+Error: File not found: /tmp/status.marker
 ```
 ### Example 2 – Check a specific file
 `./agecheck.sh notes.log 600`
 ### Output
-`EXPIRED: 'notes.log' is 720 seconds old (threshold: 600).`
+`STALE: 'notes.log' is 720 seconds old (threshold: 600).`
 
 ### Example 3 – Simulate an older file
 ```bash
@@ -82,4 +82,4 @@ touch -d "10 minutes ago" old.txt
 ./agecheck.sh old.txt 300
 ```
 ### Output
-`EXPIRED: 'old.txt' is 600 seconds old (threshold: 300).`
+`STALE: 'old.txt' is 600 seconds old (threshold: 300).`

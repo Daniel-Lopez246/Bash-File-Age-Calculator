@@ -25,7 +25,7 @@ age=$((current_time - file_mod_time))
 
 # Compare age to threshold and print result
 if [ "$age" -gt "$MAX_AGE" ]; then
-    echo "Stale: '$FILE' is older than $MAX_AGE seconds (age: $age)."
+    echo "STALE: '$FILE' is older than $MAX_AGE seconds (age: $age)."
 else
     echo "ACTIVE: '$FILE' is still fresh (age: $age)"
 fi
